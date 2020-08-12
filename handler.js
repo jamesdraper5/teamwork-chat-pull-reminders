@@ -11,16 +11,13 @@ async function getMessageText() {
   console.log("stalePRs", stalePRs);
   const formattedPRs = stalePRs.map(formatPR);
   console.log("formattedPRs", formattedPRs);
-  let messageText = '- '
-  messageText += formattedPRs.join('\n-');
-  console.log('messageText 1', messageText)
+  let messageText = `There are ${stalePRs.length} PRs with no reviews or comments: \n- ${formattedPRs.join("\n-")}`;
+  console.log("messageText", messageText);
   return messageText;
 }
 
 function formatPR(pr) {
-  return `[${pr.repo}] - [${pr.title}](${pr.url}) - ${getDaysAgo(
-    pr.createdAt
-  )}`;
+  return `[${pr.repo}] - [${pr.title}](${pr.url}) - ${pr.author} (${getDaysAgo(pr.createdAt)})`;
 }
 
 function getDaysAgo(date) {
