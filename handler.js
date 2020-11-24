@@ -4,32 +4,30 @@ const moment = require('moment');
 const getStalePRs = require('./lib/github');
 const sendMessage = require('./lib/sendMessage');
 
-const channelUrl = process.env.CHANNEL_URL;
-const relevantRepos = process.env.REPO_NAMES.split(',');
-
-const teams = [
+/*
+available opts:
+  - filterFn: A custom filter function to filter the PRs, e.g. by draft only: `(pr) => pr.node.isDraft` - the available nodes can been seen in the query in github.js
+  - message: A custom message at the start of your notification that describes what PRs are listed, e.g. "Here are all the draft PRs"
+*/
+const channels = [
   {
-    name: 'Echo',
-    channelUrl: process.env.CHANNEL_URL,
-    repos: relevantRepos,
-    opts: {} // you can add a custom `filterFn` here to filter the PRs
-  },
-  {
-    name: 'Reports Channel',
-    channelUrl: 'https://chat-hooks.us.teamwork.com/v1/in/1/467af93b-10f2-4338-ae7b-da5abf6ce742',
+    name: 'Team Echo',
+    channelUrl: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
     repos: [
       'project-manager',
       'projects-web-app'
     ],
     opts: {
+      message: 'Test custom message: these are draft PRS:',
       filterFn: (pr) => pr.node.isDraft
     }
   },
   {
-    name: 'Custom Fields',
-    channelUrl: 'https://chat-hooks.us.teamwork.com/v1/in/1/52ed7609-7161-460f-8745-d4b319e6eec1',
+    name: 'Team Echo',
+    channelUrl: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
     repos: [
-      'projectsapigo'
+      'project-manager',
+      'projects-web-app'
     ],
     opts: {}
   }
@@ -40,7 +38,8 @@ async function getMessageText(repos, opts = {}) {
   console.log("stalePRs", stalePRs);
   const formattedPRs = stalePRs.map(formatPR);
   console.log("formattedPRs", formattedPRs);
-  let messageText = `There are ${stalePRs.length} PRs with no reviews or comments: \n- ${formattedPRs.join("\n-")}`;
+  let messageText = opts.message || `There are ${stalePRs.length} PRs with no reviews or comments:`;
+  messageText += `\n- ${formattedPRs.join("\n-")}`;
   console.log("messageText", messageText);
   return messageText;
 }
@@ -63,10 +62,10 @@ function getDaysAgo(date) {
 module.exports.sendUpdate = async event => {
   try {
     await Promise.all(
-      teams.map(async team => {
+      channels.map(async channel => {
         const messageText = await getMessageText(team.repos, team.opts);
-        console.log('messageText', messageText)
-        await sendMessage(messageText, channelUrl);
+        console.log('messageText', messageText);
+        await sendMessage(messageText, team.channelUrl);
       })
     );
     return {
