@@ -11,18 +11,6 @@ module.exports = [
       'project-manager',
       'projects-web-app'
     ],
-    opts: {
-      message: 'Test custom message: these are draft PRS:',
-      filterFn: (pr) => pr.node.isDraft
-    }
-  },
-  {
-    name: 'Team Echo',
-    url: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
-    repos: [
-      'project-manager',
-      'projects-web-app'
-    ],
     opts: {}
   }
 ];
