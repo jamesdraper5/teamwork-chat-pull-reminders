@@ -12,7 +12,7 @@ available opts:
 const channels = [
   {
     name: 'Team Echo',
-    channelUrl: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
+    url: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
     repos: [
       'project-manager',
       'projects-web-app'
@@ -24,7 +24,7 @@ const channels = [
   },
   {
     name: 'Team Echo',
-    channelUrl: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
+    url: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
     repos: [
       'project-manager',
       'projects-web-app'
@@ -63,9 +63,9 @@ module.exports.sendUpdate = async event => {
   try {
     await Promise.all(
       channels.map(async channel => {
-        const messageText = await getMessageText(team.repos, team.opts);
+        const messageText = await getMessageText(channel.repos, channel.opts);
         console.log('messageText', messageText);
-        await sendMessage(messageText, team.channelUrl);
+        await sendMessage(messageText, channel.url);
       })
     );
     return {
