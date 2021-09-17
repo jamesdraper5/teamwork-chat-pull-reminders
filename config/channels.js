@@ -4,8 +4,7 @@ const bravoTeamMembers = [
   'synapse',
   'atilkan',
   'visaran',
-  'sineadcullinane',
-  'EmilyLawlor'
+  'sanjay-bhuva'
 ];
 
 /*
