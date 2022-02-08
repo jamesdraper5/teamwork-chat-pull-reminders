@@ -1,10 +1,9 @@
 const bravoTeamMembers = [
-  'jamesdraper5',
-  'gkubisa',
-  'synapse',
-  'atilkan',
-  'visaran',
-  'sanjay-bhuva'
+  "jamesdraper5",
+  "atilkan",
+  "Michal-Dziedzinski",
+  "IvayloEntropy",
+  "sanjay-bhuva",
 ];
 
 /*
@@ -14,19 +13,18 @@ available opts:
 */
 module.exports = [
   {
-    name: 'Bravo Team',
-    url: 'https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7',
-    repos: [
-      'project-manager',
-      'projects-web-app'
-    ],
+    name: "Bravo Team",
+    url: "https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7",
+    repos: ["project-manager", "projects-web-app"],
     opts: {
-      filterFn: function(pr) {
-        return !pr.node.isDraft &&
+      filterFn: function (pr) {
+        return (
+          !pr.node.isDraft &&
           pr.node.reviews.nodes.length === 0 &&
           pr.node.comments.nodes.length === 0 &&
-          bravoTeamMembers.includes(pr.node.author.login);
-      }
-    }
-  }
+          bravoTeamMembers.includes(pr.node.author.login)
+        );
+      },
+    },
+  },
 ];
