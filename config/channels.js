@@ -17,7 +17,7 @@ module.exports = [
   {
     name: "Bravo Team",
     url: "https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7",
-    repos: ["project-manager", "teamwork-web-app"],
+    repos: ["teamwork-lightspeed", "teamwork-web-app"],
     opts: {
       filterFn: function (pr) {
         return (
