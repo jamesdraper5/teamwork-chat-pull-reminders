@@ -8,10 +8,18 @@ const channels = require("./config/channels");
 async function getMessageText(stalePRs) {
   const formattedPRs = stalePRs.map(formatPR);
   console.log("formattedPRs", formattedPRs);
-  let messageText = `There are ${stalePRs.length} PRs with no reviews or comments:`;
+  let messageText = getMessageTitle(stalePRs.length);
   messageText += `\n- ${formattedPRs.join("\n-")}`;
   console.log("messageText", messageText);
   return messageText;
+}
+
+function getMessageTitle(prCount) {
+  if (prCount === 1) {
+    return `There is ${prCount} PR with no reviews or comments:`;
+  } else {
+    return `There are ${prCount} PRs with no reviews or comments:`;
+  }
 }
 
 function formatPR(pr) {
