@@ -16,9 +16,9 @@ async function getMessageText(stalePRs) {
 
 function getMessageTitle(prCount) {
   if (prCount === 1) {
-    return `There is ${prCount} PR with no reviews or comments:`;
+    return `There is ${prCount} PR that is more than 3 days old:`;
   } else {
-    return `There are ${prCount} PRs with no reviews or comments:`;
+    return `There are ${prCount} PRs that are more than 3 days old:`;
   }
 }
 

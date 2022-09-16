@@ -9,6 +9,15 @@ const bravoTeamMembers = [
   "luketynan",
 ];
 
+function getDiffInDays(date1, date2) {
+  const diffTime = Math.abs(date2 - date1);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+}
+
+function getDaysSinceToday(date) {
+  return getDiffInDays(date, new Date());
+}
+
 /*
 available opts:
   - filterFn: A custom filter function to filter the PRs, e.g. by draft only: `(pr) => pr.node.isDraft` - the available nodes can been seen in the query in github.js
@@ -35,12 +44,11 @@ module.exports = [
         );
         console.log("pr.node.author.login", pr.node.author.login);
 
+        const prDaysOld = getDaysSinceToday(new Date(pr.node.createdAt));
+
         return (
           !pr.node.isDraft &&
-          pr.node.reviews.nodes.length === 0 &&
-          (pr.node.comments.nodes.length === 0 ||
-            (pr.node.comments.nodes.length === 1 &&
-              pr.node.comments.nodes[0].author === "changeset-bot")) &&
+          prDaysOld > 3 &&
           bravoTeamMembers.includes(pr.node.author.login)
         );
       },
