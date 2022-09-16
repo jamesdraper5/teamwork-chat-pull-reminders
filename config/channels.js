@@ -29,7 +29,7 @@ available opts:
 module.exports = [
   {
     name: "Bravo Team",
-    url: "https://chat-hooks.us.teamwork.com/v1/in/1/2663f77d-9477-4a10-a868-2c5ee06661a7",
+    url: "https://chat-hooks.us.teamwork.com/v1/in/1/a0cde569-809e-4e7c-9abc-33647ab4eeb4",
     repos: ["teamwork-lightspeed", "teamwork-web-app"],
     opts: {
       filterFn: function (pr) {
