@@ -23,6 +23,8 @@ module.exports = [
       filterFn: function (pr) {
         console.log("-------- Title ---------", pr.node.title);
 
+        console.log("Created At", pr.node.createdAt);
+
         console.log(
           "pr.node.reviews.nodes.length",
           pr.node.reviews.nodes.length
