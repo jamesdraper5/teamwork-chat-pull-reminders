@@ -21,10 +21,22 @@ module.exports = [
     repos: ["teamwork-lightspeed", "teamwork-web-app"],
     opts: {
       filterFn: function (pr) {
+        console.log(
+          "pr.node.reviews.nodes.length",
+          pr.node.reviews.nodes.length
+        );
+        console.log(
+          "pr.node.comments.nodes.length ",
+          pr.node.comments.nodes.length
+        );
+        console.log("pr.node.author.login", pr.node.author.login);
+
         return (
           !pr.node.isDraft &&
           pr.node.reviews.nodes.length === 0 &&
-          pr.node.comments.nodes.length === 0 &&
+          (pr.node.comments.nodes.length === 0 ||
+            (pr.node.comments.nodes.length === 1 &&
+              pr.node.comments.nodes[0].author === "changeset-bot")) &&
           bravoTeamMembers.includes(pr.node.author.login)
         );
       },
