@@ -46,6 +46,8 @@ module.exports = [
 
         const prDaysOld = getDaysSinceToday(new Date(pr.node.createdAt));
 
+        console.log("PR days old", prDaysOld);
+
         return (
           !pr.node.isDraft &&
           prDaysOld > 3 &&
