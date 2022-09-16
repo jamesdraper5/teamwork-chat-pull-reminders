@@ -21,6 +21,8 @@ module.exports = [
     repos: ["teamwork-lightspeed", "teamwork-web-app"],
     opts: {
       filterFn: function (pr) {
+        console.log("-------- Title ---------", pr.node.title);
+
         console.log(
           "pr.node.reviews.nodes.length",
           pr.node.reviews.nodes.length
