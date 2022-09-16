@@ -1,11 +1,12 @@
 const bravoTeamMembers = [
   "jamesdraper5",
   "atilkan",
-  "Michal-Dziedzinski",
-  "IvayloEntropy",
   "sanjay-bhuva",
-  "jasmes2k",
   "wandarkaf",
+  "IvayloEntropy",
+  "PeterLazarov",
+  "Michal-Dziedzinski",
+  "luketynan",
 ];
 
 /*
