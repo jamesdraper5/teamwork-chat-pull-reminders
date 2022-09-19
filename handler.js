@@ -52,7 +52,7 @@ module.exports.sendUpdate = async (event) => {
         if (stalePRs.length) {
           const messageText = await getMessageText(stalePRs);
           console.log("messageText", messageText);
-          //await sendMessage(messageText, channel.url);
+          await sendMessage(messageText, channel.url);
         }
       })
     );
