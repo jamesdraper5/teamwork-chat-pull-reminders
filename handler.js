@@ -9,7 +9,7 @@ async function getMessageText(stalePRs) {
   const formattedPRs = stalePRs.map(formatPR);
   console.log("formattedPRs", formattedPRs);
   let messageText = `${getMessageTitle(stalePRs.length)} \n\n`;
-  messageText += "| Repository | PR | Author | Date Opened | \n";
+  messageText += "| Repository | PR | Author | Date Created | \n";
   messageText += "----- | ----- | ----- | ----- | \n";
   messageText += `${formattedPRs.join("\n")}`;
   console.log("messageText", messageText);
@@ -35,12 +35,12 @@ function getDaysAgo(date) {
     .startOf("day")
     .diff(moment(date).startOf("day"), "days");
   if (daysOld === 1) {
-    return `${daysOld} day old`;
+    return `${daysOld} day ago`;
   }
   if (daysOld === 0) {
     return "Created Today";
   }
-  return `${daysOld} days old`;
+  return `${daysOld} days ago`;
 }
 
 module.exports.sendUpdate = async (event) => {
