@@ -9,7 +9,10 @@ async function getMessageText(stalePRs) {
   const formattedPRs = stalePRs.map(formatPR);
   console.log("formattedPRs", formattedPRs);
   let messageText = getMessageTitle(stalePRs.length);
-  messageText += `\n- ${formattedPRs.join("\n-")}`;
+  messageText += "\n\n";
+  messageText += "| Repository | PR | Author | Date Opened |";
+  messageText += "----- | ----- | ----- | ----- |";
+  messageText += `${formattedPRs.join("\n")}`;
   console.log("messageText", messageText);
   return messageText;
 }
@@ -23,9 +26,9 @@ function getMessageTitle(prCount) {
 }
 
 function formatPR(pr) {
-  return `[${pr.repo}] - [${pr.title}](${pr.url}) - ${pr.author} (${getDaysAgo(
+  return `| ${pr.repo} | [${pr.title}](${pr.url}) | ${pr.author} | ${getDaysAgo(
     pr.createdAt
-  )})`;
+  )} |`;
 }
 
 function getDaysAgo(date) {
@@ -50,7 +53,7 @@ module.exports.sendUpdate = async (event) => {
         if (stalePRs.length) {
           const messageText = await getMessageText(stalePRs);
           console.log("messageText", messageText);
-          await sendMessage(messageText, channel.url);
+          //await sendMessage(messageText, channel.url);
         }
       })
     );
