@@ -8,10 +8,9 @@ const channels = require("./config/channels");
 async function getMessageText(stalePRs) {
   const formattedPRs = stalePRs.map(formatPR);
   console.log("formattedPRs", formattedPRs);
-  let messageText = getMessageTitle(stalePRs.length);
-  messageText += "\n\n";
-  messageText += "| Repository | PR | Author | Date Opened |";
-  messageText += "----- | ----- | ----- | ----- |";
+  let messageText = `${getMessageTitle(stalePRs.length)} \n\n`;
+  messageText += "| Repository | PR | Author | Date Opened | \n";
+  messageText += "----- | ----- | ----- | ----- | \n";
   messageText += `${formattedPRs.join("\n")}`;
   console.log("messageText", messageText);
   return messageText;
