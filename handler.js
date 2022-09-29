@@ -18,9 +18,9 @@ async function getMessageText(stalePRs) {
 
 function getMessageTitle(prCount) {
   if (prCount === 1) {
-    return `There is ${prCount} PR that is more than 3 days old:`;
+    return `There is ${prCount} PR open:`;
   } else {
-    return `There are ${prCount} PRs that are more than 3 days old:`;
+    return `There are ${prCount} PRs open:`;
   }
 }
 

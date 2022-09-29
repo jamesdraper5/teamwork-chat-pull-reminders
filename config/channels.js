@@ -47,14 +47,8 @@ module.exports = [
         );
         console.log("pr.node.author.login", pr.node.author.login);
 
-        const prDaysOld = getDaysSinceToday(new Date(pr.node.createdAt));
-
-        console.log("PR days old", prDaysOld);
-
         return (
-          !pr.node.isDraft &&
-          prDaysOld > 3 &&
-          bravoTeamMembers.includes(pr.node.author.login)
+          !pr.node.isDraft && bravoTeamMembers.includes(pr.node.author.login)
         );
       },
     },
