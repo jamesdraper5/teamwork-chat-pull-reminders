@@ -1,13 +1,41 @@
 const bravoTeamMembers = [
-  "jamesdraper5",
-  "atilkan",
-  "sanjay-bhuva",
-  "wandarkaf",
-  "IvayloEntropy",
-  "PeterLazarov",
-  "Michal-Dziedzinski",
-  "luketynan",
+  {
+    githubHandle: "jamesdraper5",
+    chatHandle: "@james",
+  },
+  {
+    githubHandle: "atilkan",
+    chatHandle: "@emrah",
+  },
+  {
+    githubHandle: "sanjay-bhuva",
+    chatHandle: "@sanjay",
+  },
+  {
+    githubHandle: "wandarkaf",
+    chatHandle: "@alonso",
+  },
+  {
+    githubHandle: "IvayloEntropy",
+    chatHandle: "@ivaylo",
+  },
+  {
+    githubHandle: "PeterLazarov",
+    chatHandle: "@peterlazarov",
+  },
+  {
+    githubHandle: "Michal-Dziedzinski",
+    chatHandle: "@michal",
+  },
+  {
+    githubHandle: "luketynan",
+    chatHandle: "@luketynan",
+  },
 ];
+
+const bravoTeamGithubHandles = bravoTeamMembers.map(
+  (member) => member.githubHandle
+);
 
 function getDiffInDays(date1, date2) {
   const diffTime = Math.abs(date2 - date1);
@@ -33,24 +61,12 @@ module.exports = [
     repos: ["teamwork-lightspeed", "teamwork-web-app"],
     opts: {
       filterFn: function (pr) {
-        console.log("-------- Title ---------", pr.node.title);
-
-        console.log("Created At", pr.node.createdAt);
-
-        console.log(
-          "pr.node.reviews.nodes.length",
-          pr.node.reviews.nodes.length
-        );
-        console.log(
-          "pr.node.comments.nodes.length ",
-          pr.node.comments.nodes.length
-        );
-        console.log("pr.node.author.login", pr.node.author.login);
-
         return (
-          !pr.node.isDraft && bravoTeamMembers.includes(pr.node.author.login)
+          !pr.node.isDraft &&
+          bravoTeamGithubHandles.includes(pr.node.author.login)
         );
       },
+      teamMembers: bravoTeamMembers,
     },
   },
 ];

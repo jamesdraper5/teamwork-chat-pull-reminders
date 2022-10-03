@@ -5,14 +5,20 @@ const getStalePRs = require("./lib/github");
 const sendMessage = require("./lib/sendMessage");
 const channels = require("./config/channels");
 
+const reviewDecisionMap = {
+  APPROVED: ":white_check_mark: Approved",
+  REVIEW_REQUIRED: ":thinking_face: Needs review",
+  CHANGES_REQUESTED: ":x: Changes requested",
+};
+
 async function getMessageText(stalePRs) {
   const formattedPRs = stalePRs.map(formatPR);
-  console.log("formattedPRs", formattedPRs);
+  //console.log("formattedPRs", formattedPRs);
   let messageText = `${getMessageTitle(stalePRs.length)} \n\n`;
-  messageText += "| Repository | PR | Author | Date Created | \n";
-  messageText += "----- | ----- | ----- | ----- | \n";
+  messageText += "| Repository | PR | Author | Status | Date Created | \n";
+  messageText += "----- | ----- | ----- | ----- | ----- | \n";
   messageText += `${formattedPRs.join("\n")}`;
-  console.log("messageText", messageText);
+  //console.log("messageText", messageText);
   return messageText;
 }
 
@@ -25,9 +31,9 @@ function getMessageTitle(prCount) {
 }
 
 function formatPR(pr) {
-  return `| ${pr.repo} | [${pr.title}](${pr.url}) | ${pr.author} | ${getDaysAgo(
-    pr.createdAt
-  )} |`;
+  return `| ${pr.repo} | [${pr.title}](${pr.url}) | ${pr.author.chatHandle} | ${
+    reviewDecisionMap[pr.reviewDecision]
+  } | ${getDaysAgo(pr.createdAt)} |`;
 }
 
 function getDaysAgo(date) {
@@ -47,8 +53,8 @@ module.exports.sendUpdate = async (event) => {
   try {
     await Promise.all(
       channels.map(async (channel) => {
-        const stalePRs = await getStalePRs(channel.repos, channel.opts);
-        console.log("stalePRs", stalePRs);
+        let stalePRs = await getStalePRs(channel.repos, channel.opts);
+        //console.log("stalePRs", stalePRs);
         if (stalePRs.length) {
           const messageText = await getMessageText(stalePRs);
           console.log("messageText", messageText);
