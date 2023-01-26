@@ -27,10 +27,6 @@ const bravoTeamMembers = [
     githubHandle: "Michal-Dziedzinski",
     chatHandle: "@michal",
   },
-  {
-    githubHandle: "luketynan",
-    chatHandle: "@luketynan",
-  },
 ];
 
 const bravoTeamGithubHandles = bravoTeamMembers.map(
