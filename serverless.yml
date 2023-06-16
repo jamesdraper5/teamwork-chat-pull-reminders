@@ -28,4 +28,4 @@ functions:
   prs:
     handler: handler.sendUpdate
     events:
-      - schedule: cron(00 8 ? * MON-FRI *)
+      - schedule: cron(00 9 ? * MON-FRI *)
