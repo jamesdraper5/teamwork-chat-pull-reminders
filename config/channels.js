@@ -20,12 +20,8 @@ const bravoTeamMembers = [
     chatHandle: "@ivaylo",
   },
   {
-    githubHandle: "PeterLazarov",
-    chatHandle: "@peterlazarov",
-  },
-  {
-    githubHandle: "Michal-Dziedzinski",
-    chatHandle: "@michal",
+    githubHandle: "barry-mckay",
+    chatHandle: "@barry",
   },
 ];
 
